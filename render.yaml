@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: canadian-contracts-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://canadian-contracts-api.onrender.com/api
+
+  - type: web
+    name: canadian-contracts-api
+    env: node
+    buildCommand: cd backend && npm install && npm run build
+    startCommand: cd backend && node dist/server.js
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: UPLOAD_DIR
+        value: uploads
+      - key: NODE_ENV
+        value: production 
