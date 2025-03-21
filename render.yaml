@@ -1,17 +1,13 @@
 services:
   - type: web
-    name: canadian-contracts-frontend
+    name: canadian-contracts
     env: docker
-    dockerfilePath: ./frontend/Dockerfile
+    dockerfilePath: Dockerfile
     envVars:
+      - key: DOCKER_COMPOSE_VERSION
+        value: "1.29.2"
       - key: VITE_API_URL
         value: https://canadian-contracts-api.onrender.com/api
-
-  - type: web
-    name: canadian-contracts-api
-    env: docker
-    dockerfilePath: ./backend/Dockerfile
-    envVars:
       - key: PORT
         value: 3001
       - key: UPLOAD_DIR
