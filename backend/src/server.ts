@@ -14,8 +14,10 @@ const port = process.env.PORT || 3001;
 
 // CORS configuration
 const allowedOrigins = [
-  'http://localhost:5173',
-  'https://canadian-contracts.onrender.com'
+  'http://localhost:5173',                    // Local development
+  'http://localhost:3000',                    // Alternative local port
+  'https://canadian-contracts.onrender.com',  // Production frontend
+  'https://canadian-contracts-frontend.onrender.com' // Alternative production frontend
 ];
 
 app.use(cors({
@@ -24,6 +26,7 @@ app.use(cors({
     if (!origin) return callback(null, true);
     
     if (allowedOrigins.indexOf(origin) === -1) {
+      console.log('Blocked origin:', origin); // Debug logging
       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
       return callback(new Error(msg), false);
     }
@@ -39,9 +42,9 @@ app.use(express.json());
 app.use('/uploads', express.static(UPLOAD_DIR));
 
 // API routes
-app.use('/api', proposalRoutes);
 app.use('/api/contracts', contractRoutes);
-app.use('/api', vendorRoutes);
+app.use('/api/proposals', proposalRoutes);
+app.use('/api/vendors', vendorRoutes);
 
 // Health check endpoint
 app.get("/", (req, res) => {

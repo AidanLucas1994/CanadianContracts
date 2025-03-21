@@ -18,7 +18,12 @@ services:
     publishDir: frontend/dist
     envVars:
       - key: VITE_API_URL
-        value: https://canadian-contracts-api.onrender.com/api
+        fromService:
+          name: canadian-contracts-api
+          type: web
+          property: url
+          envVarKey: VITE_API_URL
+        value: ${VITE_API_URL}/api
     routes:
       - type: rewrite
         source: /*
