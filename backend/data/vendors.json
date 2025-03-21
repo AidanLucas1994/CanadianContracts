@@ -1,0 +1,30 @@
+[
+  {
+    "id": "2f83e010-f2d4-4219-af54-25f78a81807e",
+    "companyName": "Tech Solutions Canada",
+    "services": [
+      "IT Consulting",
+      "Software Development"
+    ],
+    "province": "Ontario",
+    "city": "Toronto",
+    "postalCode": "M5V 2T6",
+    "contactInfo": {
+      "name": "John Smith",
+      "email": "john@techsolutions.ca",
+      "phone": "416-555-0123"
+    },
+    "businessNumber": "123456789",
+    "yearEstablished": 2010,
+    "languages": [
+      "English",
+      "French"
+    ],
+    "certifications": [
+      "ISO 9001",
+      "CMMI Level 3"
+    ],
+    "createdAt": "2025-03-21T03:31:51.077Z",
+    "updatedAt": "2025-03-21T03:31:51.078Z"
+  }
+]
