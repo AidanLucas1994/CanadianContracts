@@ -1,26 +1,31 @@
-FROM node:18-alpine as build
+# Build stage
+FROM node:18-alpine as builder
 
 WORKDIR /app
 
-# Copy package files
+# Install dependencies first (better caching)
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
+# Copy configuration files
+COPY tsconfig*.json ./
+COPY vite.config.ts ./
+COPY index.html ./
+
 # Copy source code
-COPY . .
+COPY src/ src/
+COPY public/ public/
 
 # Build the app
 RUN npm run build
 
-# Serve with nginx
+# Production stage
 FROM nginx:alpine
 
-# Copy built assets from builder stage
-COPY --from=build /app/dist /usr/share/nginx/html
+# Copy built assets
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copy nginx config
+# Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port
